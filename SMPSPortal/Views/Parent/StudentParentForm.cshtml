@@ -1,0 +1,88 @@
+﻿@using Syncfusion.JavaScript.Models
+@model SmpsPortal.Core.ViewModels.ParentViewModel
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container body-content">
+    <div class="row">
+       
+
+        <div class="col-md-12">
+            <!--<button type="button" id="addBtn" class="btn btn-info"> Add </button>-->
+            <p></p>
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+                <span class="alert alert-warning">@Model.Message</span>
+                <div style="padding: 10px 10px;">
+
+                    @using (Html.BeginForm("AssignStudent", "Parent"))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.GradeLevelId, "Grade Level")
+                            @Html.DropDownListFor(m => m.GradeLevelId, new SelectList(Model.GradeLevelList, "Id", "Code"), "Select GradeLevel", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.GradeLevelId)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SchoolClassId, "Class ")
+                            @Html.DropDownListFor(m => m.SchoolClassId, new SelectList(String.Empty, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SchoolClassId)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.StudentId, "Student")
+                            @Html.DropDownListFor(m => m.StudentId, new SelectList(String.Empty, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.StudentId)
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Relationship, "Relationship")
+                            @Html.DropDownListFor(m => m.Relationship, new SelectList(Model.RelationshipList, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Relationship)
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-md"> Save </button>
+                    }
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts
+{
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document)
+          .ready(function () {
+              var stateUrl = "SchoolClasses";
+              LoadDropDownController("#GradeLevelId", "#SchoolClassId", stateUrl);
+          });
+        $(document)
+         .ready(function () {
+             var studUrl = "StudentLoad";
+             LoadDropDownController("#SchoolClassId", "#StudentId", studUrl);
+         });
+    </script>
+}
+
+

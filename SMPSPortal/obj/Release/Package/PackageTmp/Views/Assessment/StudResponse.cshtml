@@ -1,0 +1,152 @@
+﻿@using SmpsPortal.Core.Models
+@using Syncfusion.JavaScript
+@using Syncfusion.JavaScript.Models
+@using Syncfusion.MVC.EJ
+@model SmpsPortal.Core.ViewModels.CaResponseViewModel
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container body-content">
+    <div class="row">
+       
+
+        <div class="col-md-12">
+            <!--<button type="button" id="addBtn" class="btn btn-info"> Add </button>-->
+            <p></p>
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div style="padding: 10px;">
+
+                    @using (Html.BeginForm(Model.Action, "Assessment"))
+                    {
+                        <ul class="nav nav-tabs nav-justified">
+                            <li role="presentation" class="active">
+                                <a href="#assessment" data-toggle="tab">Details</a>
+
+
+
+                            </li>
+                            <li role="presentation">
+                                <a href="#qanda" data-toggle="tab">Questions and Response</a>
+
+
+                            </li>
+
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="assessment" class="tab-pane fade in active">
+                                <p></p>
+                                @Html.AntiForgeryToken()
+                               
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Title, "Title")
+                                    <p>@Model.Title</p>
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.DateDue, "Is Due by")
+                                    <p>@Model.DateDue</p>
+
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Score, "Score")
+                                    <p>@Model.Score</p>
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Remark, "Remarks")
+                                    <p>@Model.Remark</p>
+
+                                </div>
+                            </div>
+
+                            <div id="qanda" class="tab-pane fade in">
+
+                                <p></p>
+                                @{
+                                    List<String> toolsList = new List<string>() { "formatStyle", "font", "style", "effects", "alignment", "lists", "indenting", "clipboard", "doAction", "clear", "links", "casing", "view", "edit", "print" };
+                                    List<String> style = new List<string>() { "bold", "italic", "underline", "strikethrough" };
+                                    List<String> alignment = new List<string>() { "justifyLeft", "justifyCenter", "justifyRight", "justifyFull" };
+                                    List<String> edit = new List<String>() { "findAndReplace" };
+                                    List<String> lists = new List<string>() { "unorderedList", "orderedList" };
+                                    List<String> indenting = new List<string> { "outdent", "indent" };
+                                    List<String> clipboard = new List<string>() { "cut", "copy", "paste" };
+                                    List<String> doAction = new List<string>() { "undo", "redo" };
+                                    List<String> clear = new List<string>() { "clearFormat", "clearAll" };
+                                    List<String> tables = new List<string>() { "createTable", "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "deleteTable" };
+                                    List<String> links = new List<string>() { "createLink", "removeLink" };
+                                    List<String> effects = new List<string>() { "superscript", "subscript" };
+                                    List<String> casing = new List<string>() { "upperCase", "lowerCase" };
+                                    List<String> formatStyle = new List<string>() { "format" };
+                                    List<String> view = new List<string>() { "fullScreen", "zoomIn", "zoomOut" };
+                                    List<String> print = new List<string>() { "print" };
+
+                                }
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Questions, "Questions")
+                                    @Html.EJ().RTEFor(m => m.Questions, new { @class = "form-control", autofocus = "autofocus" }).EnableHtmlEncode(true).Width("820px").ToolsList(toolsList).Tools(tool => tool.Clear(clear).FormatStyle(formatStyle).Edit(edit).Links(links).Effects(effects).Casing(casing).Tables(tables).Styles(style).Alignment(alignment).Lists(lists).Clipboard(clipboard).DoAction(doAction).Indenting(indenting).View(view).Print(print)).AllowEditing(false)
+                                    @Html.ValidationMessageFor(m => m.Questions)
+                                </div>
+                                @{
+                                    if (Model.DateDue > DateTime.Now)
+                                    {
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Response, "Submit Response")
+                                            @Html.EJ().RTEFor(m => m.Response, new { @class = "form-control", autofocus = "autofocus" }).EnableHtmlEncode(true).Width("820px").ToolsList(toolsList).Tools(tool => tool.Clear(clear).FormatStyle(formatStyle).Edit(edit).Links(links).Effects(effects).Casing(casing).Tables(tables).Styles(style).Alignment(alignment).Lists(lists).Clipboard(clipboard).DoAction(doAction).Indenting(indenting).View(view).Print(print)).AllowEditing(true)
+                                            @Html.ValidationMessageFor(m => m.Response)
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Response, "Due Date for Submission is passed", new { @class = "errmsg" })
+                                            @Html.EJ().RTEFor(m => m.Response, new { @class = "form-control", autofocus = "autofocus" }).EnableHtmlEncode(true).Enabled(false).Width("820px").ToolsList(toolsList).Tools(tool => tool.Clear(clear).FormatStyle(formatStyle).Edit(edit).Links(links).Effects(effects).Casing(casing).Tables(tables).Styles(style).Alignment(alignment).Lists(lists).Clipboard(clipboard).DoAction(doAction).Indenting(indenting).View(view).Print(print)).AllowEditing(true)
+                                            @Html.ValidationMessageFor(m => m.Response)
+                                        </div>
+                                    }
+                                }
+
+                                <button type="submit" class="btn btn-primary btn-md" onclick="onclickencode"> Save </button>
+                            </div>
+                        </div>
+
+
+
+
+                                    }
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function onclickencode(args) {
+            var rte = $("#<%=Questions.ClientID%>").ejRTE("instance")
+            rte.option("value", $('<div/>').text(rte.model.value).html());
+            var rte2 = $("#<%=Response.ClientID%>").ejRTE("instance")
+            rte2.option("value", $('<div/>').text(rte.model.value).html());
+        }
+    </script>
+
+}

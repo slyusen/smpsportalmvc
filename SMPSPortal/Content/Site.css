@@ -1,0 +1,562 @@
+﻿body {
+    padding-top: 90px;
+    padding-bottom: 20px;
+    font-size: 16px;
+    background-color: #eeeeee;
+}
+
+.frm {
+    padding-left: 30px;
+}
+
+    .frm > label {
+        padding-top: 15px;
+        padding-bottom: 5px;
+    }
+
+.errmsg {
+    color: orangered;
+    font-style: italic;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.pfooter {
+    margin-left: 25%;
+    font-size: 13px;
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('fonts/glyphicons-halflings-regular.eot');
+    src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+span.field-validation-error {
+    color: red;
+    font-weight: bold;
+}
+
+
+
+/*
+    :: NavBar Side Menu Begins ::
+*/
+
+
+
+
+
+.md-row{
+    position: relative;
+}
+.nav-side-menu {
+    overflow: auto;
+    font-family: verdana;
+    font-size: 12px;
+    font-weight: 200;
+    background-color: #2e353d;
+    position: fixed;
+    top: 0px;
+    left:0px;
+    display: block;
+    width: 300px;
+    height: 100%;
+    color: #e1ffff;
+}
+
+    .nav-side-menu .brand {
+        background-color: #23282e;
+        line-height: 50px;
+        display: block;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .nav-side-menu .toggle-btn {
+        display: none;
+    }
+
+    .nav-side-menu ul,
+    .nav-side-menu li {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+        line-height: 35px;
+        cursor: pointer;
+        /*    
+    .collapsed{
+       .arrow:before{
+                 font-family: FontAwesome;
+                 content: "\f053";
+                 display: inline-block;
+                 padding-left:10px;
+                 padding-right: 10px;
+                 vertical-align: middle;
+                 float:right;
+            }
+     }
+*/
+    }
+
+        .nav-side-menu ul :not(collapsed) .arrow:before,
+        .nav-side-menu li :not(collapsed) .arrow:before {
+            font-family: FontAwesome;
+            content: "\f078";
+            display: inline-block;
+            padding-left: 10px;
+            padding-right: 10px;
+            vertical-align: middle;
+            float: right;
+        }
+
+        .nav-side-menu ul .active,
+        .nav-side-menu li .active {
+            border-left: 3px solid #d19b3d;
+            background-color: #4f5b69;
+        }
+
+        .nav-side-menu ul .sub-menu li.active,
+        .nav-side-menu li .sub-menu li.active {
+            color: #d19b3d;
+        }
+
+            .nav-side-menu ul .sub-menu li.active a,
+            .nav-side-menu li .sub-menu li.active a {
+                color: #d19b3d;
+            }
+
+        .nav-side-menu ul .sub-menu li,
+        .nav-side-menu li .sub-menu li {
+            background-color: #181c20;
+            border: none;
+            line-height: 28px;
+            border-bottom: 1px solid #23282e;
+            margin-left: 0px;
+        }
+
+            .nav-side-menu ul .sub-menu li:hover,
+            .nav-side-menu li .sub-menu li:hover {
+                background-color: #020203;
+            }
+
+            .nav-side-menu ul .sub-menu li:before,
+            .nav-side-menu li .sub-menu li:before {
+                font-family: FontAwesome;
+                content: "\f105";
+                display: inline-block;
+                padding-left: 10px;
+                padding-right: 10px;
+                vertical-align: middle;
+            }
+
+    .nav-side-menu li {
+        padding-left: 0px;
+        border-left: 3px solid #2e353d;
+        border-bottom: 1px solid #23282e;
+    }
+
+        .nav-side-menu li a {
+            text-decoration: none;
+            color: #e1ffff;
+        }
+
+            .nav-side-menu li a i {
+                padding-left: 10px;
+                width: 20px;
+                padding-right: 20px;
+            }
+
+        .nav-side-menu li:hover {
+            border-left: 3px solid #d19b3d;
+            background-color: #4f5b69;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+@media (max-width: 767px) {
+    .nav-side-menu {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+
+        .nav-side-menu .toggle-btn {
+            display: block;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 10 !important;
+            padding: 3px;
+            background-color: #ffffff;
+            color: #000;
+            width: 40px;
+            text-align: center;
+        }
+
+    .brand {
+        text-align: left !important;
+        font-size: 22px;
+        padding-left: 20px;
+        line-height: 50px !important;
+    }
+}
+
+@media (min-width: 767px) {
+    .nav-side-menu .menu-list .menu-content {
+        display: block;
+    }
+}
+
+
+
+/*
+    :: NavBar Side Menu Ends ::
+*/
+
+div.circle-avatar-medium {
+    /* make it responsive */
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
+    /* div height to be the same as width*/
+    padding-top: 100%;
+    /* make it a cirkle */
+    border-radius: 50%;
+    /* Centering on image`s center*/
+    background-position-y: center;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    /* it makes the clue thing, takes smaller dimention to fill div */
+    background-size: cover;
+    /* it is optional, for making this div centered in parent*/
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+div.circle-avatar {
+    /* make it responsive */
+    max-width: 10%;
+    width: 10%;
+    height: auto;
+    display: block;
+    /* div height to be the same as width*/
+    padding-top: 10%;
+    /* make it a cirkle */
+    border-radius: 50%;
+    /* Centering on image`s center*/
+    background-position-y: center;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    /* it makes the clue thing, takes smaller dimention to fill div */
+    background-size: cover;
+    /* it is optional, for making this div centered in parent*/
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+li.circle-avatar-small {
+    margin-top: 5px;
+    margin-left: 10px;
+    max-width: 10%;
+    width: 10%;
+    height: auto;
+    display: block;
+    padding-top: 10%;
+    border-radius: 50%;
+    background-position-y: center;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    top: 15px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.act {
+    width: 300px;
+}
+
+.srch {
+    width: 300px;
+}
+/* Bootstrap overrides */
+
+.container {
+    padding-left: 0px;
+    max-width: 1370px;
+}
+
+.dropdown-menu {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.navbar-inverse {
+    background-color: #15263c;
+    border-color: #428bca;
+}
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: #428bca;
+        font-weight: 700;
+        padding-left: 25px;
+    }
+
+    .navbar-inverse .navbar-nav > .dropdown > a .caret {
+        border-top-color: #fff;
+        border-bottom-color: #fff;
+    }
+
+    .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+        background-color: rgba(34, 69, 99, 0.33);
+    }
+
+    .navbar-inverse .notifications {
+        position: relative;
+    }
+
+        .navbar-inverse .notifications .badge {
+            position: absolute;
+            top: 8px;
+            right: -1px;
+            background: #a80a0a;
+        }
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    font-size: 15px;
+    height: 40px;
+    -ms-border-radius: 9x;
+    border-radius: 9px;
+}
+
+.searchTxt {
+    height: 34px;
+    float: right;
+    font-size: 13px;
+}
+
+.searchBtn {
+    float: left;
+}
+
+.input-group.form-group {
+    padding-top: 10px;
+}
+
+.btn {
+    /* font-size: 17px;
+    padding: 7px 20px; */
+    -ms-border-radius: 9x;
+    border-radius: 9px;
+}
+
+.appBtn {
+    font-size: 15px;
+    padding: 7px 20px;
+}
+/* Page level styles*/
+
+.con > div {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 1em;
+}
+
+.pan1 {
+    /* background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);*/
+    font-size: 13px;
+    padding-left: 8px;
+    padding-top: 8px;
+}
+
+.pan2 {
+}
+
+.pan3 {
+}
+
+.active {
+    font-weight: bolder;
+}
+
+.gigs {
+    padding-top: 5px;
+    list-style: none;
+}
+
+    .gigs > li {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+        .gigs > li .date {
+            background-color: red;
+            color: white;
+            text-align: center;
+            width: 60px;
+            -ms-border-radius: 8px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+            .gigs > li .date .month {
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 2px 6px;
+            }
+
+            .gigs > li .date .day {
+                background-color: #f7f7f7;
+                color: #333;
+                font-size: 18px;
+                padding: 6px 12px;
+            }
+
+        .gigs > li .details {
+            position: absolute;
+            top: 0;
+            left: 70px;
+            margin-top: 10px;
+        }
+
+            .gigs > li .details .artist {
+                display: block;
+                font-weight: bold;
+                padding-top: 18px;
+            }
+
+        .gigs > li > div .title {
+            padding-bottom: 12px;
+        }
+
+        .gigs > li .details .genre {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .gigs > li .actions {
+            font-size: 15px;
+            display: none;
+        }
+
+        .gigs > li:hover .actions {
+            display: block;
+        }
+
+.voffset {
+    margin-top: 2px;
+}
+
+.voffset1 {
+    margin-top: 5px;
+}
+
+.voffset2 {
+    margin-top: 10px;
+}
+
+.voffset3 {
+    margin-top: 20px;
+}
+
+.voffset4 {
+    margin-top: 40px;
+}
+
+.voffset5 {
+    margin-top: 80px;
+}
+
+ul .notifications-pop {
+    list-style: none;
+    padding-left: 0;
+    font-size: 13px;
+}
+
+    ul .notifications-pop > li {
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        font-size: 13px;
+    }
+
+        ul .notifications-pop > li:last-child {
+            border-bottom: none;
+        }
+
+.popover-notifications .popover-content {
+    padding: 0;
+    height: 210px;
+    overflow-y: scroll;
+}
+
+ul.notifications-pop .highlight {
+    font-weight: bold;
+}

@@ -1,0 +1,81 @@
+﻿@model SmpsPortal.Core.ViewModels.ProgramViewModel
+@using SmpsPortal.Core.Models
+@using Syncfusion.JavaScript
+@using Syncfusion.JavaScript.Models
+@using Syncfusion.MVC.EJ
+@{
+    ViewBag.Title = "School Programs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container body-content">
+    <div class="row">
+     
+
+        <div class="col-md-12">
+            <!--<button type="button" id="addBtn" class="btn btn-info"> Add </button>-->
+            <p></p>
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div>
+
+                    @(Html.EJ().Grid<Program>("Grid1")
+                            .Datasource(ds => ds.URL("DataSource").UpdateURL("ProgramUpdate").InsertURL("ProgramInsert").RemoveURL("ProgramDelete").Adaptor(AdaptorType.UrlAdaptor))
+                            .AllowPaging()
+                            .EditSettings(edit => { edit.AllowAdding().AllowDeleting().AllowEditing().RowPosition(RowPosition.Bottom).ShowDeleteConfirmDialog().EditMode(EditMode.Normal); })
+                            .ToolbarSettings(toolbar =>
+                            {
+                                toolbar.ShowToolbar().ToolbarItems(items =>
+                                {
+                                    items.AddTool(ToolBarItems.Add);
+                                    items.AddTool(ToolBarItems.Edit);
+                                    items.AddTool(ToolBarItems.Delete);
+                                    items.AddTool(ToolBarItems.Update);
+                                    items.AddTool(ToolBarItems.Cancel);
+                                });
+                            })
+                            .ClientSideEvents(events =>
+                            {
+                                events.EndAdd("EndAdd");
+                            })
+                          .Columns(col =>
+                          {
+                              col.Field("Id").HeaderText("Id").IsPrimaryKey(true).Visible(false).AllowEditing(false).TextAlign(TextAlign.Right).ValidationRules(v => v.AddRule("required", true).AddRule("number", true)).Width(20).Add();
+                              col.Field("Name").HeaderText("Name").Width(80).Add();
+                              col.Field("Description").HeaderText("Description").Width(120).Add();
+
+                          })
+                    )
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script>
+
+        function EndAdd(sender, args) {
+
+            window.location.reload(true);
+        }
+
+    </script>
+
+
+}
+
+
+

@@ -1,0 +1,70 @@
+﻿@model SmpsPortal.Core.ViewModels.TeacherCourseViewModel
+@{
+    ViewBag.Title = "Assign Courses to Teacher";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="bb-alert alert alert-info" style="display: none;">
+    <span> </span>
+</div>
+<div class="container body-content">
+    <div class="row">
+      
+        <div class="col-md-12">
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div class="list-group">
+                    @{
+
+                    }
+                    @foreach (var teach in Model.Teachers)
+                    {
+                        string tCourses = "", allCourses = "";
+                        string tCoursesId = "", allCoursesId = "";
+                        int k = 0;
+                        int l = 0;
+                        var teacherAssignedCourses = Model.AssignedCourses.Where(c => c.TeacherId == teach.Id);
+                        List<int> assignedCourseList = teacherAssignedCourses.Select(us => us.Id).ToList();
+                        
+                        var allCoursesNot = Model.AllCourses.Where(c => !assignedCourseList.Contains(c.Id));
+
+                        foreach (var all in allCoursesNot)
+                        {
+                            allCourses = allCourses + "," + all.Code;
+                            allCoursesId = allCoursesId + "," + all.Id;
+                            k++;
+                        }
+
+                        foreach (var t in teacherAssignedCourses)
+                        {
+
+                            tCourses = tCourses + "," + t.CourseCode;
+                            tCoursesId = tCoursesId + "," + t.Id;
+                            l++;
+                        }
+
+
+
+                        <a href="#" class="list-group-item" data-teach-id="@teach.Id" data-teach-name="@teach.Name" data-all-courses-id="@allCoursesId" data-all-courses="@allCourses" data-assigned-courses-id="@tCoursesId" data-assigned-courses="@tCourses">@teach.Name</a>
+                    }
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+
+        assignCoursesController();
+
+    </script>
+}

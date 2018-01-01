@@ -1,0 +1,56 @@
+﻿@model SmpsPortal.Core.ViewModels.DesignationViewModel
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container body-content">
+    <div class="row">
+       
+        <div class="col-md-12">
+            <!--<button type="button" id="addBtn" class="btn btn-info"> Add </button>-->
+            <p></p>
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div style="padding: 10px 10px;">
+
+                    @using (Html.BeginForm(Model.Action, "Designations"))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Title)
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control", autofocus = "autofocus" })
+                            @Html.ValidationMessageFor(m => m.Title)
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DepartmentId, "Department")
+                            @Html.DropDownListFor(m => m.DepartmentId, new SelectList(Model.DepartmentList, "Id", "Title", 1), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.DepartmentId)
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-md"> Save </button>
+                    }
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

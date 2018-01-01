@@ -1,0 +1,70 @@
+﻿@model SmpsPortal.Core.ViewModels.GradesViewModel
+@using SmpsPortal.Core.Models
+@using Syncfusion.JavaScript
+@using Syncfusion.JavaScript.Models
+@using Syncfusion.MVC.EJ
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container body-content">
+    <div class="row">
+        
+
+        <div class="col-md-12">
+
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div style="padding: 10px;">
+
+
+                    <div class="form-group">
+
+                        <p> Class Position: <span id="cPosition" style="font-weight:bold"> @Model.Position </span> </p>
+                    </div>
+
+                    @(Html.EJ().Grid<Grade>("Grid1")
+                          .Datasource(ds => ds.URL("GetDataSource3").Adaptor(AdaptorType.UrlAdaptor))
+                           .AllowPaging()
+
+                          .Columns(col =>
+                          {
+
+
+                              col.Field("Id").HeaderText("Id").IsPrimaryKey(true).Visible(false).AllowEditing(false).TextAlign(TextAlign.Right).ValidationRules(v => v.AddRule("required", true).AddRule("number", true)).Width(20).Add();
+                              col.Field("CourseCode").HeaderText("Course").Width(120).Add();
+                              col.Field("StudentName").HeaderText("Student Name").Width(60).Add();
+                              col.Field("ClassCode").HeaderText("Class").Width(60).Add();
+                              col.Field("ExamScore").HeaderText("Exam Score").Width(60).Add();
+                              col.Field("TotalCAScore").HeaderText("CA Score").Width(60).Add();
+                              col.Field("Grade").HeaderText("Grade").Width(60).Add();
+                          })
+                    )
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+
+
+    <script>
+
+
+
+    </script>
+}

@@ -1,0 +1,231 @@
+﻿@using SmpsPortal.Core.Models
+@using SmpsPortal.Core.ViewModels
+@using Syncfusion.JavaScript
+@using Syncfusion.JavaScript.Models
+@using Syncfusion.MVC.EJ
+@model SmpsPortal.Core.ViewModels.StudentViewModel
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container body-content">
+    <div class="row">
+        
+
+        <div class="col-md-12">
+            <!--<button type="button" id="addBtn" class="btn btn-info"> Add </button>-->
+            <p></p>
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div style="padding: 10px 10px;">
+
+                    @using (Html.BeginForm(Model.Action, "Students"))
+                    {
+                        <ul class="nav nav-tabs nav-justified">
+                            <li role="presentation" class="active">
+                                <a href="#personal" data-toggle="tab">Personal Info</a>
+
+
+
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#job" data-toggle="tab">School Info</a>
+
+                            </li>
+                            <li role="presentation">
+                                <a href="#medical" data-toggle="tab">Medical Info</a>
+
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="personal" class="tab-pane fade in active">
+                                <p></p>
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(m => m.Id)
+                                <hr />
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email, "Email")
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.FirstName, "First Name")
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.LastName, "Last Name")
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Phone, "Phone")
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Gender, "Gender")
+                                    @Html.DropDownListFor(m => m.Gender, EnumHelper.GetSelectList(typeof(Gender)), "Select Gender", new { @class = "form-control" })
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.DateofBirth, "Date of Birth")
+                                    @Html.EJ().DatePickerFor(m => m.DateofBirth, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address, "Residential Address")
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+
+
+                            </div>
+
+                            <div id="job" class="tab-pane fade">
+                                <p></p>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.GradeLevelId, "Grade Level")
+                                    @Html.DropDownListFor(m => m.GradeLevelId, new SelectList(Model.GradeLevelList, "Id", "Title"), "Select Department", new { @class = "form-control" })
+
+                                </div>
+                                @if (Model.Action == "Update")
+                                {
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.SchoolClassId, "Class")
+                                        @Html.DropDownListFor(m => m.SchoolClassId, new SelectList(Model.SchoolClassList, "Id", "Code"), new { @class = "form-control" })
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.SchoolClassId, "Class")
+                                        @Html.DropDownListFor(m => m.SchoolClassId, new SelectList(String.Empty, "Value", "Text"), new { @class = "form-control" })
+
+                                    </div>
+                                }
+
+                              
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.IsActive, "Is Active?")
+                                    @Html.CheckBoxFor(m => m.IsActive, new { @class = "form-control", autofocus = "autofocus" })
+                                </div>
+
+                                
+                            </div>
+
+                            <div id="medical" class="tab-pane fade">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.BloodGroup, "Blood Group")
+                                    @Html.TextBoxFor(m => m.BloodGroup, new { @class = "form-control", autofocus = "autofocus" })
+                                    @Html.ValidationMessageFor(m => m.BloodGroup)
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Genotype, "Genotype")
+                                    @Html.TextBoxFor(m => m.Genotype, new { @class = "form-control", autofocus = "autofocus" })
+                                    @Html.ValidationMessageFor(m => m.Genotype)
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.PhysicianName, "Physician Name")
+                                    @Html.TextBoxFor(m => m.PhysicianName, new { @class = "form-control", autofocus = "autofocus" })
+                                    @Html.ValidationMessageFor(m => m.PhysicianName)
+
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.PhysicianPhone, "Physician Phone")
+                                    @Html.TextBoxFor(m => m.PhysicianPhone, new { @class = "form-control", autofocus = "autofocus" })
+                                    @Html.ValidationMessageFor(m => m.PhysicianPhone)
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Hmo, "HMO")
+                                    @Html.TextBoxFor(m => m.Hmo, new { @class = "form-control", autofocus = "autofocus" })
+                                    @Html.ValidationMessageFor(m => m.Hmo)
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.HmoNumber, "HMO Number")
+                                    @Html.TextBoxFor(m => m.HmoNumber, new { @class = "form-control", autofocus = "autofocus" })
+                                    @Html.ValidationMessageFor(m => m.HmoNumber)
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Allergies, "Allergies")
+                                    @Html.TextBoxFor(m => m.Allergies, new { @class = "form-control", autofocus = "autofocus" })
+                                    @Html.ValidationMessageFor(m => m.Allergies)
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Medications, "Medications")
+                                    @Html.TextBoxFor(m => m.Medications, new { @class = "form-control", autofocus = "autofocus" })
+                                    @Html.ValidationMessageFor(m => m.Medications)
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.BriefMedicalHistory, "Brief Medical History")
+                                    @Html.TextAreaFor(m => m.BriefMedicalHistory, new { @class = "form-control", autofocus = "autofocus" })
+                                    @Html.ValidationMessageFor(m => m.BriefMedicalHistory)
+
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-md"> Save </button>
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    <script>
+        $(function () {
+
+            // initialize DatePicker component
+
+            $("#DateEnrolled").ejDatePicker();
+            $("#DateofBirth").ejDatePicker();
+          
+
+        });
+        $(document)
+            .ready(function () {
+
+                var desigUrl = "SchoolClasses";
+                LoadDropDownController("#GradeLevelId", "#SchoolClassId", desigUrl);
+            });
+
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+
+

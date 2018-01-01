@@ -1,0 +1,165 @@
+﻿@using SmpsPortal.Core.ViewModels
+@using Syncfusion.JavaScript
+@using Syncfusion.JavaScript.Models
+@using Syncfusion.MVC.EJ
+@model SmpsPortal.Core.ViewModels.ParentViewModel
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container body-content">
+<div class="row">
+   
+
+    <div class="col-md-12">
+        <!--<button type="button" id="addBtn" class="btn btn-info"> Add </button>-->
+        <p></p>
+        <div class="panel panel-default pan2">
+            <!-- Default panel contents -->
+            <div class="panel-heading">@Model.Heading</div>
+
+            <div style="padding: 10px 10px;">
+
+                @using (Html.BeginForm(Model.Action, "Parent"))
+                {
+                    <ul class="nav nav-tabs nav-justified">
+                        <li role="presentation" class="active">
+                            <a href="#personal" data-toggle="tab">Personal Info</a>
+
+
+
+                        </li>
+                        <li role="presentation">
+                            <a href="#account" data-toggle="tab">Account Info</a>
+
+
+                        </li>
+                        <li role="presentation">
+                            <a href="#job" data-toggle="tab">Parent Info</a>
+
+                        </li>
+                    </ul>
+
+                        <div class="tab-content">
+                            <div id="personal" class="tab-pane fade in active">
+                                <p></p>
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(m => m.Id)
+                                <hr />
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.FirstName, "First Name")
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.LastName, "Last Name")
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Phone, "Phone")
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Gender, "Gender")
+                                    @Html.DropDownListFor(m => m.Gender, EnumHelper.GetSelectList(typeof(Gender)), "Select Gender", new { @class = "form-control" })
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.DateofBirth, "Date of Birth")
+                                    @Html.EJ().DatePickerFor(m => m.DateofBirth, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address, "Residential Address")
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div id="account" class="tab-pane fade">
+                                <p></p>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email, "Email")
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Password, "Password")
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password")
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+                            </div>
+                            <div id="job" class="tab-pane fade">
+                                <p></p>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Occupation, "Occupation")
+                                    @Html.TextBoxFor(m => m.Occupation, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+                               
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.BusinessAddress, "Business Address")
+                                    @Html.TextAreaFor(m => m.BusinessAddress, new { @class = "form-control", autofocus = "autofocus" })
+
+                                </div>
+
+                               
+
+
+
+                                <button type="submit" class="btn btn-primary btn-md"> Save </button>
+                            </div>
+                        </div>
+
+                }
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+</div>
+
+
+
+@section scripts
+{
+    <script>
+        $(function () {
+
+            // initialize DatePicker component
+
+           
+            $("#DateofBirth").ejDatePicker();
+
+
+        });
+       
+
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}

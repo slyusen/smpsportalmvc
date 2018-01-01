@@ -1,0 +1,55 @@
+﻿@model SmpsPortal.Core.ViewModels.ParentViewModel
+@using SmpsPortal.Core.Models
+@using SmpsPortal.Core.Models
+@using Syncfusion.JavaScript
+@using Syncfusion.JavaScript.Models
+@using Syncfusion.MVC.EJ
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container body-content">
+    <div class="row">
+       
+
+        <div class="col-md-12">
+            @{
+                
+                <a href="../AssignStudent/@Model.Id" class="btn btn-info">Assign Student</a>
+            }
+            
+            <p></p>
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div>
+
+                    @(Html.EJ().Grid<StudentParent>("Grid1").Datasource((IEnumerable<object>) ViewBag.datasource).AllowPaging().Columns(col =>
+                      {
+
+                          col.Field("Id").HeaderText("Id").IsPrimaryKey(true).Visible(false).AllowEditing(false).TextAlign(TextAlign.Right).ValidationRules(v => v.AddRule("required", true).AddRule("number", true)).Width(20).Add();
+                          col.Field("StudentName").HeaderText("StudentName").Width(120).Add();
+                          col.Field("ParentName").HeaderText("ParentName").Width(120).Add();
+                          col.Field("Relationship").HeaderText("Relationship").Width(80).Add();
+
+                      }))
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+
+
+}

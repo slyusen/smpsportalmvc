@@ -1,0 +1,660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A07A9152-34BF-47D8-AF7B-2E5A2FCC064A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CPSC6116_Project</RootNamespace>
+    <AssemblyName>CPSC6116_Project</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\Smps\Smps\bin\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="JWT, Version=1.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JWT.1.3.4\lib\3.5\JWT.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Moq">
+      <HintPath>..\..\Smps\Smps\bin\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions">
+      <HintPath>..\..\Smps\Smps\bin\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\..\Smps\Smps\bin\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.WebApi">
+      <HintPath>..\..\Smps\Smps\bin\Ninject.Web.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=14.2450.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.DocIO.Base, Version=14.2450.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.DocIO.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.EJ, Version=14.2450.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.EJ.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.EJ.Export, Version=14.2450.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.EJ.Export.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.EJ.MVC, Version=14.2500.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.EJ.MVC.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.ExcelToPDFConverter.Base, Version=14.2450.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.ExcelToPDFConverter.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Linq.Base, Version=14.2450.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.Linq.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.OfficeChart.Base, Version=14.2450.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.OfficeChart.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=14.2450.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Presentation.Base, Version=14.2450.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.Presentation.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=14.2450.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Smps\Smps\bin\Syncfusion.XlsIO.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Twilio, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.5.1.0\lib\net35\Twilio.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\..\Smps\Smps\bin\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MappingProfile.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Academics\AcademicResultsController.cs" />
+    <Compile Include="Controllers\Academics\AssessmentController.cs" />
+    <Compile Include="Controllers\Academics\CoursesController.cs" />
+    <Compile Include="Controllers\Academics\ExamsController.cs" />
+    <Compile Include="Controllers\Academics\GradeLevelController.cs" />
+    <Compile Include="Controllers\Academics\GradesController.cs" />
+    <Compile Include="Controllers\Academics\SchoolClassesController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Administration\DepartmentController.cs" />
+    <Compile Include="Controllers\Administration\DesignationsController.cs" />
+    <Compile Include="Controllers\Academics\ProgramsController.cs" />
+    <Compile Include="Controllers\Administration\ParentController.cs" />
+    <Compile Include="Controllers\Administration\StudentsController.cs" />
+    <Compile Include="Controllers\AnnouncementController.cs" />
+    <Compile Include="Controllers\Api\AcademicsController.cs" />
+    <Compile Include="Controllers\Api\AssignCoursesController.cs" />
+    <Compile Include="Controllers\Api\DesignationsController.cs" />
+    <Compile Include="Controllers\Api\GetPosition2Controller.cs" />
+    <Compile Include="Controllers\Api\GetPosition3Controller.cs" />
+    <Compile Include="Controllers\Api\GetPositionController.cs" />
+    <Compile Include="Controllers\Api\NotificationsController.cs" />
+    <Compile Include="Controllers\Api\SchoolClassesController.cs" />
+    <Compile Include="Controllers\Api\SettingsController.cs" />
+    <Compile Include="Controllers\Api\StudentClassLoad2Controller.cs" />
+    <Compile Include="Controllers\Api\StudentClassLoadController.cs" />
+    <Compile Include="Controllers\Api\StudentLoadController.cs" />
+    <Compile Include="Controllers\Api\StudentYearTermLoadController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HR\EmployeeController.cs" />
+    <Compile Include="Controllers\HR\TeachersController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Core\Dtos\AnnouncementDto.cs" />
+    <Compile Include="Core\Dtos\AssessmentDto.cs" />
+    <Compile Include="Core\Dtos\CourseDto.cs" />
+    <Compile Include="Core\Dtos\NotificationDto.cs" />
+    <Compile Include="Core\Dtos\UserDto.cs" />
+    <Compile Include="Core\Dtos\UserRolesDto.cs" />
+    <Compile Include="Core\IUnitofWork.cs" />
+    <Compile Include="Core\Models\AcademicRecord.cs" />
+    <Compile Include="Core\Models\CaResult.cs" />
+    <Compile Include="Core\Models\ClassPosition.cs" />
+    <Compile Include="Core\Models\CourseRegister.cs" />
+    <Compile Include="Core\Models\Exam.cs" />
+    <Compile Include="Core\Models\Grade.cs" />
+    <Compile Include="Core\Models\GradeSystem.cs" />
+    <Compile Include="Core\Models\MedicalRecord.cs" />
+    <Compile Include="Core\Models\SchoolConfig.cs" />
+    <Compile Include="Core\ViewModels\AcademicResultList.cs" />
+    <Compile Include="Core\ViewModels\AcademicResultsViewModel.cs" />
+    <Compile Include="Core\ViewModels\AnnouncementViewModel.cs" />
+    <Compile Include="Core\ViewModels\AssessmentViewModel.cs" />
+    <Compile Include="Core\ViewModels\CaList.cs" />
+    <Compile Include="Core\ViewModels\CaListItems.cs" />
+    <Compile Include="Core\ViewModels\CaResponseViewModel.cs" />
+    <Compile Include="Core\ViewModels\CaResultList.cs" />
+    <Compile Include="Core\ViewModels\CaResultViewModel.cs" />
+    <Compile Include="Core\ViewModels\CourseList.cs" />
+    <Compile Include="Core\ViewModels\CourseViewModel.cs" />
+    <Compile Include="Core\ViewModels\ExamList.cs" />
+    <Compile Include="Core\ViewModels\ExamResultList.cs" />
+    <Compile Include="Core\ViewModels\ExamResultViewModel.cs" />
+    <Compile Include="Core\ViewModels\ExamViewModel.cs" />
+    <Compile Include="Core\ViewModels\FutureDate.cs" />
+    <Compile Include="Core\ViewModels\GradesViewModel.cs" />
+    <Compile Include="Core\ViewModels\MenusViewModel.cs" />
+    <Compile Include="Core\ViewModels\RolesViewModel.cs" />
+    <Compile Include="Core\ViewModels\TeacherCourseList.cs" />
+    <Compile Include="Core\Models\YearTerm.cs" />
+    <Compile Include="Core\Repositories\IAcademicRecordRepository.cs" />
+    <Compile Include="Core\Repositories\IAssessmentRepository.cs" />
+    <Compile Include="Core\Repositories\IAttendanceRepository.cs" />
+    <Compile Include="Core\Repositories\ICaResultRepository.cs" />
+    <Compile Include="Core\Repositories\ICourseRegisterRepository.cs" />
+    <Compile Include="Core\Repositories\ICourseRepository.cs" />
+    <Compile Include="Core\Repositories\IExamRepository.cs" />
+    <Compile Include="Core\Repositories\IExamResultRepository.cs" />
+    <Compile Include="Core\Repositories\IGradeRepository.cs" />
+    <Compile Include="Core\Repositories\IAnnouncementRepository.cs" />
+    <Compile Include="Core\Repositories\IParentRepository.cs" />
+    <Compile Include="Core\Repositories\ISchoolClassRepository.cs" />
+    <Compile Include="Core\Repositories\IStudentParentRepository.cs" />
+    <Compile Include="Core\Repositories\IStudentRepository.cs" />
+    <Compile Include="Core\Repositories\ITeacherCourseRepository.cs" />
+    <Compile Include="Core\Repositories\IUserNotificationsRepository.cs" />
+    <Compile Include="Core\ViewModels\CourseCategory.cs" />
+    <Compile Include="Core\ViewModels\DataResult.cs" />
+    <Compile Include="Core\ViewModels\DepartmentViewModel.cs" />
+    <Compile Include="Core\ViewModels\DesignationList.cs" />
+    <Compile Include="Core\ViewModels\DesignationsViewModel.cs" />
+    <Compile Include="Core\ViewModels\EmployeeList.cs" />
+    <Compile Include="Core\ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="Core\Models\ExamResult.cs" />
+    <Compile Include="Core\ViewModels\ExamType.cs" />
+    <Compile Include="Core\ViewModels\GradeLevelViewModel.cs" />
+    <Compile Include="Core\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Core\Models\Program.cs" />
+    <Compile Include="Core\ViewModels\ParentList.cs" />
+    <Compile Include="Core\ViewModels\ParentViewModel.cs" />
+    <Compile Include="Core\ViewModels\ProgramViewModel.cs" />
+    <Compile Include="Core\ViewModels\SchoolClassesList.cs" />
+    <Compile Include="Core\ViewModels\SchoolClassesViewModel.cs" />
+    <Compile Include="Core\ViewModels\StudentList.cs" />
+    <Compile Include="Core\ViewModels\StudentParentList.cs" />
+    <Compile Include="Core\ViewModels\StudentViewModel.cs" />
+    <Compile Include="Core\Repositories\IDepartmentRepository.cs" />
+    <Compile Include="Core\Repositories\IDesignationRepository.cs" />
+    <Compile Include="Core\Repositories\IEmployeeRepository.cs" />
+    <Compile Include="Core\Repositories\IGradeLevelRepository.cs" />
+    <Compile Include="Core\Repositories\IMenuRepository.cs" />
+    <Compile Include="Core\Repositories\IProgramRepository.cs" />
+    <Compile Include="Core\Repositories\IUserRepository.cs" />
+    <Compile Include="Core\ViewModels\TeacherCourseViewModel.cs" />
+    <Compile Include="Core\ViewModels\TeacherList.cs" />
+    <Compile Include="Core\ViewModels\YearTermList.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703150247208_passVal.cs" />
+    <Compile Include="Migrations\201703150247208_passVal.Designer.cs">
+      <DependentUpon>201703150247208_passVal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Core\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Core\ViewModels\ActionType.cs" />
+    <Compile Include="Core\Models\Announcement.cs" />
+    <Compile Include="Core\ViewModels\Gender.cs" />
+    <Compile Include="Core\ViewModels\MenuViewModel.cs" />
+    <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\Assessment.cs" />
+    <Compile Include="Core\ViewModels\AssessmentType.cs" />
+    <Compile Include="Core\Models\Attendance.cs" />
+    <Compile Include="Core\Models\Course.cs" />
+    <Compile Include="Core\Models\Department.cs" />
+    <Compile Include="Core\Models\Designation.cs" />
+    <Compile Include="Core\Models\Employee.cs" />
+    <Compile Include="Core\ViewModels\EmployeeCategory.cs" />
+    <Compile Include="Core\Models\EmployeeStore.cs" />
+    <Compile Include="Core\ViewModels\EmployeeType.cs" />
+    <Compile Include="Core\Models\GradeLevel.cs" />
+    <Compile Include="Core\ViewModels\Iterator.cs" />
+    <Compile Include="Core\ViewModels\ManageViewModels.cs" />
+    <Compile Include="Core\Models\Menu.cs" />
+    <Compile Include="Core\Models\MenuCapability.cs" />
+    <Compile Include="Core\Models\MenuComponent.cs" />
+    <Compile Include="Core\Models\MenuItem.cs" />
+    <Compile Include="Core\Models\MigrationsContextFactory.cs" />
+    <Compile Include="Core\Models\Notification.cs" />
+    <Compile Include="Core\ViewModels\NotificationType.cs" />
+    <Compile Include="Core\Models\Observer.cs" />
+    <Compile Include="Core\Models\Parent.cs" />
+    <Compile Include="Core\Models\ParentStore.cs" />
+    <Compile Include="Core\Models\SchoolClass.cs" />
+    <Compile Include="Core\Models\Student.cs" />
+    <Compile Include="Core\Models\StudentParent.cs" />
+    <Compile Include="Core\Models\StudentStore.cs" />
+    <Compile Include="Core\Models\Subject.cs" />
+    <Compile Include="Core\Models\TeacherCourse.cs" />
+    <Compile Include="Core\Models\UserNotification.cs" />
+    <Compile Include="Core\Models\UserStore.cs" />
+    <Compile Include="Core\Models\UserType.cs" />
+    <Compile Include="Persistence\IApplicationDbContext.cs" />
+    <Compile Include="Persistence\Repository\AcademicRecordRepository.cs" />
+    <Compile Include="Persistence\Repository\AnnouncementRepository.cs" />
+    <Compile Include="Persistence\Repository\AssessmentRepository.cs" />
+    <Compile Include="Persistence\Repository\AttendanceRepository.cs" />
+    <Compile Include="Persistence\Repository\CaResultRepository.cs" />
+    <Compile Include="Persistence\Repository\CourseRegisterRepository.cs" />
+    <Compile Include="Persistence\Repository\CourseRepository.cs" />
+    <Compile Include="Persistence\Repository\DepartmentRepository.cs" />
+    <Compile Include="Persistence\Repository\DesignationRepository.cs" />
+    <Compile Include="Persistence\Repository\EmployeeRepository.cs" />
+    <Compile Include="Persistence\Repository\ExamRepository.cs" />
+    <Compile Include="Persistence\Repository\ExamResultRepository.cs" />
+    <Compile Include="Persistence\Repository\GradeLevelRepository.cs" />
+    <Compile Include="Persistence\Repository\GradeRepository.cs" />
+    <Compile Include="Persistence\Repository\MenuRepository.cs" />
+    <Compile Include="Persistence\Repository\ParentRepository.cs" />
+    <Compile Include="Persistence\Repository\ProgramRepository.cs" />
+    <Compile Include="Persistence\Repository\SchoolClassRepository.cs" />
+    <Compile Include="Persistence\Repository\StudentParentRepository.cs" />
+    <Compile Include="Persistence\Repository\StudentRepository.cs" />
+    <Compile Include="Persistence\Repository\TeacherCourseRepository.cs" />
+    <Compile Include="Persistence\Repository\UserNotificationsRepository.cs" />
+    <Compile Include="Persistence\Repository\UsersRepository.cs" />
+    <Compile Include="Persistence\UnitofWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\ai.0.22.19-build00125.js" />
+    <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="Scripts\app\controllers\assignCoursesController.js" />
+    <Content Include="Scripts\app\controllers\followController.js" />
+    <Content Include="Scripts\app\controllers\gigDetailsController.js" />
+    <Content Include="Scripts\app\controllers\gigsController.js" />
+    <Content Include="Scripts\app\controllers\gigsDetailsController.js" />
+    <Content Include="Scripts\app\controllers\LoadDropDownController.js" />
+    <Content Include="Scripts\app\controllers\programsController.js" />
+    <Content Include="Scripts\app\controllers\schoolRolesController.js" />
+    <Content Include="Scripts\app\services\attendanceService.js" />
+    <Content Include="Scripts\app\services\followService.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\PublishProfiles\1and1.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\Create.cshtml" />
+    <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Students\Create.cshtml" />
+    <Content Include="Views\Shared\_Menus.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Designations\Index.cshtml" />
+    <Content Include="Views\Designations\DesignationForm.cshtml" />
+    <Content Include="Views\Programs\Index.cshtml" />
+    <Content Include="Views\GradeLevel\Index.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Students\Edit.cshtml" />
+    <Content Include="Views\SchoolClasses\Index.cshtml" />
+    <Content Include="Views\SchoolClasses\SchoolClassForm.cshtml" />
+    <Content Include="Views\Parent\Index.cshtml" />
+    <Content Include="Views\Parent\Create.cshtml" />
+    <Content Include="Views\Parent\Edit.cshtml" />
+    <Content Include="Views\Parent\StudentParentForm.cshtml" />
+    <Content Include="Views\Parent\StudentParent.cshtml" />
+    <Content Include="Views\Announcement\Index.cshtml" />
+    <Content Include="Views\Announcement\AnnouncementForm.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Courses\CourseForm.cshtml" />
+    <Content Include="Views\Courses\MyCourses.cshtml" />
+    <Content Include="Views\Courses\RegisterElectives.cshtml" />
+    <Content Include="Views\Assessment\Index.cshtml" />
+    <Content Include="Views\Assessment\CAForm.cshtml" />
+    <Content Include="Views\Assessment\StudentCAView.cshtml" />
+    <Content Include="Views\Assessment\StudResponse.cshtml" />
+    <Content Include="Views\Assessment\ViewAssessments.cshtml" />
+    <Content Include="Views\Assessment\ViewResponse.cshtml" />
+    <Content Include="Views\Assessment\ViewScores.cshtml" />
+    <Content Include="Views\Exams\Index.cshtml" />
+    <Content Include="Views\Exams\ExamForm.cshtml" />
+    <Content Include="Views\Exams\StudentView.cshtml" />
+    <Content Include="Views\Exams\ViewScores.cshtml" />
+    <Content Include="Views\Teachers\Index.cshtml" />
+    <Content Include="Views\Teachers\AssignCourses.cshtml" />
+    <Content Include="Views\Grades\Index.cshtml" />
+    <Content Include="Views\Grades\MyGrades.cshtml" />
+    <Content Include="Views\Grades\ViewGrades.cshtml" />
+    <Content Include="Views\AcademicResults\Index.cshtml" />
+    <Content Include="Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Settings\SchoolRoles.cshtml" />
+    <Content Include="Views\Manage\ChangeUserPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703150247208_passVal.resx">
+      <DependentUpon>201703150247208_passVal.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59684</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59684/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

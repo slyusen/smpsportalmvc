@@ -1,0 +1,184 @@
+﻿@using Syncfusion.MVC.EJ
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>@ViewBag.Title - SMPS</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/ej/web/bootstrap-theme/ej.web.all.min.css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div class="wrapper">
+        @{
+            Html.RenderAction("MenuAction", "Home");
+        }
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Dashboard</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+
+                     
+                        @{
+                            Html.RenderAction("LoginAction", "Home");
+                        }
+
+                    </div>
+                </div>
+            </nav>
+
+            <div class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Contact
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    About
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Blog
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy; @DateTime.Now.Year - - School Management Portal System (SMPS)
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/app")
+    @Scripts.Render("~/Scripts/jquery.easing.1.3.js")
+    @Scripts.Render("~/Scripts/jsrender.min.js")
+    @Scripts.Render("~/Scripts/ej/web/ej.web.all.min.js")
+    @RenderSection("scripts", required: false)
+    @Html.EJ().ScriptManager();
+
+    <script type="text/x-template" id="notifications-template">
+        <ul class="notifications-pop">
+            <%
+            _.each(notifications, function(notification){
+
+            if(notification.type == 1) { %>
+            <li>
+                <span class="highlight">  <%= notification.announcement.announcer.firstName  %>  <%= notification.announcement.announcer.lastName  %> </span> has posted an announcement at  <%= moment(notification.announcement.dateGiven).format("D MMM HH:mm") %>
+            </li>
+
+            <% }
+            else if(notification.type == 3) { %>
+            <li>
+                you have a new <span class="highlight"> <%= notification.assessment.course.code %> </span> <%= notification.assessment.type %> that is due by  <%= moment(notification.assessment.dateDue).format("D MMM HH:mm") %>
+            </li>
+
+            <% }
+            else  if(notification.type == 2) {
+
+            var changes = [],
+            originalValues = [],
+            newValues = [];
+
+            if(notification.originalAnnouncementTitle != notification.announcement.title) {
+            changes.push('title');
+            originalValues.push(notification.originalAnnouncementTitle);
+            newValues.push(notification.announcement.title);
+            }
+
+            if(notification.originalDateTime != notification.announcement.dateGiven) {
+            changes.push('date/time');
+            originalValues.push(moment(notification.originalDateTime).format("D MMM HH:mm"));
+            newValues.push(moment(notification.announcement.dateGiven).format("D MMM HH:mm"));
+            }
+            %>
+
+            <li>
+                <span class="highlight">  <%= notification.announcement.announcer.firstName   %>   <%= notification.announcement.announcer.lastName   %>  </span> has changed the  <%= changes.join(' and ') %>  of the announcement from  <%= originalValues.join('/') %> to <%= newValues.join('/') %>
+            </li>
+
+            <% }
+            })
+            %>
+        </ul>
+    </script>
+    <script>
+        $(document).ready(function () {
+            $.getJSON("/api/notifications", function (notifications) {
+                if (notifications.length == 0)
+                    return;
+
+                $(".js-notifications-count")
+                    .text(notifications.length)
+                    .removeClass("hide")
+                    .addClass("animated bounceInDown");
+
+
+                $(".notifications").popover({
+                    html: true,
+                    title: "Notifications",
+                    content: function () {
+                        var compiled = _.template($("#notifications-template").html());
+                        return compiled({ notifications: notifications });
+
+                    },
+                    placement: "bottom",
+                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+
+
+
+
+
+                }).on("shown.bs.popover", function () {
+                    $.post("/api/notifications/markread")
+                        .done(function () {
+                            $(".js-notifications-count")
+                            .text("")
+                            .addClass("hide");
+                        });
+                });
+            });
+
+        });
+
+
+    </script>
+  
+</body>
+</html>

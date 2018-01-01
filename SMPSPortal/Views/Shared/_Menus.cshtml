@@ -1,0 +1,80 @@
+﻿@model SmpsPortal.Core.ViewModels.MenusViewModel
+
+
+@{
+
+
+    if (Model.Menus != null)
+    {
+
+        <div class="sidebar" data-color="blue" data-image="../Content/assets/img/sidebar-5.jpg">
+            <!--
+
+                Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+                Tip 2: you can also add an image using data-image tag
+
+            -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="/" class="simple-text">
+                        SMPS
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li class="active">
+                        <a href="/">
+                            <i class="pe-7s-graph"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    @{
+                        foreach (var menu in Model.Menus)
+                        {
+
+
+
+                            string pMenuName = menu.Name.Replace(" ", "");
+                            string icon = menu.Icon;
+
+                            <li>
+                                <a data-toggle="collapse" href="#@pMenuName">
+                                    <i class="@icon"></i>
+                                    <p>
+                                        @pMenuName
+                                            @if (menu.MenuItems.Count != 0)
+                                            {
+                                                <b class="caret"></b>
+                                            }
+                                    </p>
+                                </a>
+                                    @if (menu.MenuItems.Count != 0)
+                                    {
+                                            
+                                        <div class="collapse out" id="@pMenuName" aria-expanded="true">
+                                                <ul class="nav">
+                                                    @foreach (var submenu in menu.MenuItems)
+                                                    {
+                                                        if (submenu.Menu.Id == menu.Id)
+                                                        {
+                                                            var url = @submenu.Url;
+                                                            <li><a href="@url">@submenu.Name</a></li>
+                                                        }
+                                                    }
+                                                </ul>
+                                            </div>
+
+                                      }
+                            </li>
+
+                        }
+
+
+                    }
+                    
+                   
+                </ul>
+            </div>
+        </div>
+
+        }
+}

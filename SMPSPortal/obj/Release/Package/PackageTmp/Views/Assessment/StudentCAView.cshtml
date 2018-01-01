@@ -1,0 +1,103 @@
+﻿@model SmpsPortal.Core.ViewModels.AssessmentViewModel
+@using SmpsPortal.Core.Models
+@using Syncfusion.JavaScript
+@using Syncfusion.JavaScript.Models
+@using Syncfusion.MVC.EJ
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container body-content">
+    <div class="row">
+       
+
+        <div class="col-md-12">
+
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div style="padding: 10px;">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CourseId, "Course")
+                        @Html.DropDownListFor(m => m.CourseId, new SelectList(Model.CourseList, "Id", "Code", 1), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.CourseId)
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default btn-md" id="loadBtn"> Load </button>
+                    </div>
+
+                    @(Html.EJ().Grid<Assessment>("Grid1")
+                          .Datasource(ds => ds.URL("GetData4").Adaptor(AdaptorType.UrlAdaptor))
+                           .AllowPaging()
+
+
+
+                          .Columns(col =>
+                          {
+
+                              col.HeaderText("Action").Template(true).Template("#columnTemplate").TextAlign(TextAlign.Center).Width(60).Add();
+                              col.Field("Id").HeaderText("Id").IsPrimaryKey(true).Visible(false).AllowEditing(false).TextAlign(TextAlign.Right).ValidationRules(v => v.AddRule("required", true).AddRule("number", true)).Width(20).Add();
+                              col.Field("Title").HeaderText("Title").Width(120).Add();
+                              col.Field("Type").HeaderText("Type").Width(60).Add();
+                              col.Field("Score").HeaderText("Score").Width(60).Add();
+                              col.Field("HighestScore").HeaderText("Highest Score").Width(60).Add();
+                              col.Field("Remarks").HeaderText("Remarks").Width(120).Add();
+                              col.Field("CourseId").HeaderText("CouseId").Visible(false).Width(60).Add();
+
+                          })
+                    )
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script type="text/x-jsrender" id="columnTemplate">
+        <a href="StudResponse/{{:Id}}"> Respond </a>
+    </script>
+
+    <script>
+
+        $("#loadBtn").ejButton({
+
+            size: "Normal", click: function (args) {
+
+                var obj = $("#Grid1").ejGrid("instance");
+
+                var value = $("#CourseId").val();
+
+                //Add custom paramter to the server
+
+                var query = new ej.Query().addParams("CourseId", value);
+
+                //Creating ejDataManager with UrlAdaptor
+
+                var dm = ej.DataManager({ url: "GetData3", adaptor: new ej.UrlAdaptor() });
+                var promise = dm.executeQuery(query);
+                promise.done(function (e) {
+
+                    //Assign the result to the grid dataSource using "dataSource" method.
+
+                    obj.dataSource(e.result);
+
+                });
+
+
+
+            }
+        })
+
+    </script>
+}

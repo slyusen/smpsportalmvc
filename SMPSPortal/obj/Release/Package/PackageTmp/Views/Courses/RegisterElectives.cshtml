@@ -1,0 +1,58 @@
+﻿@using SmpsPortal.Core.Models
+@model SmpsPortal.Core.ViewModels.CourseViewModel
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container body-content">
+    <div class="row">
+     
+
+        <div class="col-md-12">
+            <!--<button type="button" id="addBtn" class="btn btn-info"> Add </button>-->
+            <p></p>
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+                <p></p>
+                <span class="alert alert-warning">@Model.Message</span>
+                <div style="padding: 10px 10px;">
+
+                    @using (Html.BeginForm(Model.Reg, "Courses"))
+                    {
+
+                        @Html.AntiForgeryToken()
+                       
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegCourseId, "Course")
+                            @Html.DropDownListFor(m => m.RegCourseId, new SelectList(Model.RegCourseList, "Id", "Code"), "Select Course", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.RegCourseId)
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-md"> Save </button>
+                    }
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+    </script>
+}

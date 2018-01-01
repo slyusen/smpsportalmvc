@@ -1,0 +1,49 @@
+﻿@model SmpsPortal.Core.ViewModels.IndexViewModel
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right act" }))
+    {
+    @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right act">
+            <li class="notifications">
+                <a href="#">
+                    <i class="glyphicon glyphicon-globe"></i>
+                    <span class="badge js-notifications-count hide"></span>
+                </a>
+            </li>
+            @{
+
+                var path = "http://" + Request.Url.Authority;
+            }
+            <li class="circle-avatar-small" style="background-image: url(@path/Images/Profile/@Model.ProfileImageUrl)">
+
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Model.CurrentUserName <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="@Url.Action("Index", "Manage")">Edit Profile</a></li>
+                    <li><a href="@Url.Action("Current", "Announcement")">Announcements</a></li>
+
+
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="#">Settings</a>
+
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                </ul>
+            </li>
+         </ul>
+
+            }
+            }
+            else
+            {
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
+            }

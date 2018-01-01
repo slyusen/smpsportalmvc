@@ -1,0 +1,56 @@
+﻿@using SmpsPortal.Core.Models;
+@model SmpsPortal.Core.ViewModels.MenuViewModel
+
+@{
+    ViewBag.Title = "Menu";
+}
+
+<h2>Menu</h2>
+
+@using (Html.BeginForm(Model.Action, "Home", new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Url, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Url, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoleId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.ListBoxFor(m => m.RoleId, Model.RoleList, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ParentMenuId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.ParentMenuId, new SelectList(Model.ParentMenu, "Id", "Name"), "None", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Submit" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

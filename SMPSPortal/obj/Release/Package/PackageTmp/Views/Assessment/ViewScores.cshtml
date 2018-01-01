@@ -1,0 +1,114 @@
+﻿@model SmpsPortal.Core.ViewModels.CaResultViewModel
+@using SmpsPortal.Core.ViewModels
+@using Syncfusion.JavaScript
+@using Syncfusion.JavaScript.Models
+@using Syncfusion.MVC.EJ
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container body-content">
+    <div class="row">
+   
+        <div class="col-md-12">
+
+            <p></p>
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div style="padding:10px;">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title, "Title")
+                        <p> @Model.Title</p>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DateGiven, "Date Given")
+                        <p> @Model.DateGiven</p>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DateDue, "Date Due")
+                        <p> @Model.DateDue</p>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.HighestScore, "Highest Score")
+                        <p> @Model.HighestScore</p>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CourseName, "Course")
+                        <p> @Model.CourseName</p>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClassName, "Class")
+                        <p> @Model.ClassName</p>
+                        @Html.HiddenFor(m => m.CaId)
+                    </div>
+
+                    @(Html.EJ().Grid<CaResultList>("Grid1")
+                            .Datasource(ds => ds.URL("GetData2").UpdateURL("CaUpdate").Adaptor(AdaptorType.UrlAdaptor))
+                           .AllowPaging()
+                            .EditSettings(edit => { edit.AllowEditing().EditMode(EditMode.Normal); })
+                            .ToolbarSettings(toolbar =>
+                            {
+                                toolbar.ShowToolbar().ToolbarItems(items =>
+                                {
+                                    items.AddTool(ToolBarItems.Edit);
+                                    items.AddTool(ToolBarItems.Cancel);
+                                    items.AddTool(ToolBarItems.Update);
+
+                                });
+                            })
+                             .ClientSideEvents(events =>
+                             {
+                                 events.EndEdit("EndEdit");
+                             })
+
+
+                          .Columns(col =>
+                          {
+
+                              col.HeaderText("Response").Template(true).Template("#columnTemplate").TextAlign(TextAlign.Center).Width(60).Add();
+
+                              col.Field("Id").HeaderText("Id").IsPrimaryKey(true).Visible(false).AllowEditing(false).TextAlign(TextAlign.Right).ValidationRules(v => v.AddRule("required", true).AddRule("number", true)).Width(20).Add();
+                              col.Field("StudentName").HeaderText("Student Name").Width(120).AllowEditing(false).Add();
+                              col.Field("Score").HeaderText("Score").Width(60).Add();
+                              col.Field("DateSubmitted").HeaderText("DateSubmitted").AllowEditing(false).Width(60).Add();
+                              col.Field("Remark").HeaderText("Remark").Width(120).Add();
+                              col.Field("CaId").Visible(false);
+
+                          })
+                    )
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script>
+
+        function EndEdit(sender, args) {
+
+            var obj = $("#Grid1").ejGrid("refreshContent");
+
+
+        }
+
+    </script>
+    <script type="text/x-jsrender" id="columnTemplate">
+        <a href="ViewResponse/{{:Id}}"> Response </a>
+    </script>
+}

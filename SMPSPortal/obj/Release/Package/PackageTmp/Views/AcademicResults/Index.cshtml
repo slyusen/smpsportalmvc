@@ -1,0 +1,131 @@
+﻿@model SmpsPortal.Core.ViewModels.AcademicResultsViewModel
+@using SmpsPortal.Core.Models
+@using Syncfusion.JavaScript
+@using Syncfusion.JavaScript.Models
+@using Syncfusion.MVC.EJ
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container body-content">
+    <div class="row">
+       
+
+        <div class="col-md-12">
+
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div style="padding: 10px;">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClassId, "Class")
+                        @Html.DropDownListFor(m => m.ClassId, new SelectList(Model.ClassList, "Id", "Code", 1), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ClassId)
+                    </div>
+                    <div class="form-group">
+                        <p> Compute Results for chosen Class </p>
+                        <button type="button" class="btn btn-default btn-md" id="loadBtn"> Compute </button>
+                        <button type="button" class="btn btn-default btn-md" id="clearBtn"> Clear </button>
+                    </div>
+
+                    @(Html.EJ().Grid<Grade>("Grid1")
+                          .Datasource(ds => ds.URL("AcademicResults/GetDataSource").Adaptor(AdaptorType.UrlAdaptor))
+                           .AllowPaging()
+
+                          .Columns(col =>
+                          {
+
+
+                              col.Field("Id").HeaderText("Id").IsPrimaryKey(true).Visible(false).AllowEditing(false).TextAlign(TextAlign.Right).ValidationRules(v => v.AddRule("required", true).AddRule("number", true)).Width(20).Add();
+                              col.Field("CourseCode").HeaderText("Course").Width(120).Add();
+                              col.Field("StudentName").HeaderText("Student Name").Width(60).Add();
+                              col.Field("ClassCode").HeaderText("Class").Width(60).Add();
+                              col.Field("ExamScore").HeaderText("Exam Score").Width(60).Add();
+                              col.Field("TotalCAScore").HeaderText("CA Score").Width(60).Add();
+                              col.Field("Grade").HeaderText("Grade").Width(60).Add();
+                          })
+                    )
+
+                    <div class="form-group">
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+
+
+    <script>
+
+        $("#loadBtn").ejButton({
+
+            size: "Normal", click: function (args) {
+
+                var obj = $("#Grid1").ejGrid("instance");
+
+                var value = $("#ClassId").val();
+
+                //Add custom paramter to the server
+
+                var query = new ej.Query().addParams("ClassId", value);
+
+                //Creating ejDataManager with UrlAdaptor
+
+                var dm = ej.DataManager({ url: "AcademicResults/ComputeResult", adaptor: new ej.UrlAdaptor() });
+                var promise = dm.executeQuery(query);
+                promise.done(function (e) {
+
+                    //Assign the result to the grid dataSource using "dataSource" method.
+
+                    obj.dataSource(e.result);
+
+                });
+
+
+
+            }
+        })
+        $("#clearBtn").ejButton({
+
+            size: "Normal", click: function (args) {
+
+                var obj = $("#Grid1").ejGrid("instance");
+
+                var value = $("#ClassId").val();
+
+                //Add custom paramter to the server
+
+                var query = new ej.Query().addParams("ClassId", value);
+
+                //Creating ejDataManager with UrlAdaptor
+
+                var dm = ej.DataManager({ url: "AcademicResults/ClearResult", adaptor: new ej.UrlAdaptor() });
+                var promise = dm.executeQuery(query);
+                promise.done(function (e) {
+
+                    //Assign the result to the grid dataSource using "dataSource" method.
+
+                    obj.dataSource(e.result);
+
+                });
+
+
+
+            }
+        })
+
+    </script>
+}

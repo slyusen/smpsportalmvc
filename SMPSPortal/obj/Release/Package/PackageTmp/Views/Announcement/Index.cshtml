@@ -1,0 +1,65 @@
+﻿@model SmpsPortal.Core.ViewModels.AnnouncementViewModel
+@using SmpsPortal.Core.Models
+@using Syncfusion.JavaScript
+@using Syncfusion.JavaScript.Models
+@using Syncfusion.MVC.EJ
+@{
+    ViewBag.Title = Model.Heading;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container body-content">
+    <div class="row">
+      
+        <div class="col-md-12">
+            @if (Model.IsEditable)
+            {@Html.ActionLink("Add New", "Create", "Announcement", new { @class = "btn btn-info" }) }
+
+            <p></p>
+            <div class="panel panel-default pan2">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Model.Heading</div>
+
+                <div>
+
+                    @{
+                        Html.EJ().Accordion("MyAnnouncements").Items(data =>
+                        {
+                        foreach (var ann in Model.Announcements)
+                        {
+                            data.Add().Text(ann.Title + " - " + ann.DateGiven.ToString()).ContentTemplate(@<p>
+                        @ann.Message <br /> @if (Model.IsEditable)
+                        {
+                            <a href="Edit/@ann.Id">Edit</a>
+                        }
+                    </p>);
+                            }
+                        }
+
+                            ).EnableMultipleOpen(true).Render();
+
+
+
+                    }
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script type="text/x-jsrender" id="columnTemplate">
+        <a href="Courses/Edit/{{:Id}}"> Edit </a>
+    </script>
+
+
+}
